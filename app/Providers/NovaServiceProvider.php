@@ -28,7 +28,13 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             ');
         });
 
-        Nova::withoutThemeSwitcher();
+        Nova::withoutThemeSwitcher(); //remove the theme switcher from the dashboard
+
+        //createcustom footer
+        Nova::footer(function(){
+            // return '<div style="text-align: center; padding: 10px; font-size: 12px; color: #666;">Powered by <a href="https://nova.laravel.com" target="_blank" class="no-underline dim text-primary font-bold">Laravel Nova</a></div>';
+            return Blade::render('nova/footer');  //create a blade file in resources/views/nova/footer.blade.php
+        });
     }
 
     /**
