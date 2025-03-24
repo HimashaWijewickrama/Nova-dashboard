@@ -123,7 +123,9 @@ return [
     |
     */
 
-    'pagination' => 'simple',
+    // 'pagination' => 'simple', //default pagination type is default. there are several types of pagination. simple, load-more, links
+
+    'pagination' => 'load-more',
 
     /*
     |--------------------------------------------------------------------------
@@ -149,7 +151,7 @@ return [
     |
     */
 
-    'currency' => 'USD',
+    'currency' => 'LKR',
 
     /*
     |--------------------------------------------------------------------------

@@ -32,6 +32,10 @@ class Product extends Resource
 
     public static $showColumnBorders = true; //remove the borders from the columns
 
+    public static $clickAction = 'ignore'; //when clicking on the row, it will not happen anything
+
+
+
     /**
      * The columns that should be searched.
      *
@@ -45,6 +49,12 @@ class Product extends Resource
         'sku',
         'quantity',
 
+    ];
+
+    public static $perPageOptions = [
+        50,
+        100,
+        150
     ];
 
     /**
