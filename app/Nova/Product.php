@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\BelongsTo;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
@@ -11,6 +12,7 @@ use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Slug;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use App\Models\Brand;
 
 class Product extends Resource
 {
@@ -76,6 +78,7 @@ class Product extends Resource
             Text::make('Sku')->required()->placeholder('sku')->placeholder('Enter SKU...')->textAlign('center')->help('Number that relailers use to differentiate products and track the inventory levels.')->sortable(),
             Number::make('Quantity')->required()->showOnPreview()->placeholder('Enter Quantity...')->textAlign('center')->sortable(),
             Boolean::make('Status', 'is_published')->required()->showOnPreview()->textAlign('center'),
+            BelongsTo::make('Brand')->sortable()->showOnPreview()->placeholder('Select Brand')->textAlign('center'),
 
         ];
     }

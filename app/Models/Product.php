@@ -20,4 +20,9 @@ class Product extends Model
         'is_published',
     ];
 
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+
 }
