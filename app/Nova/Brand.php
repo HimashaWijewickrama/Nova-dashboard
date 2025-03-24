@@ -45,7 +45,7 @@ class Brand extends Resource
     {
         return [
             // ID::make()->sortable(),
-            Text::make('Name', 'name')->sortable()->required()->textAlign('center')->showOnPreview()->placeholder('Enter the brand name'),
+            Text::make('Name', 'name')->sortable()->rules('required', 'max:255', 'unique:brands')->textAlign('center')->showOnPreview()->placeholder('Enter the brand name'),
             URL::make('Website URL', 'website_url')->sortable()->required()->textAlign('center')->showOnPreview()->placeholder('Enter the website URL'),
             Text::make('Industry', 'industry')->sortable()->required()->textAlign('center')->showOnPreview()->placeholder('Enter the industry'),
             Boolean::make('Status', 'is_published')->required()->textAlign('center')->showOnPreview(),
