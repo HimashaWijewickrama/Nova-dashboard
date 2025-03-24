@@ -28,6 +28,10 @@ class Product extends Resource
      */
     public static $title = 'name';
 
+    public static $tableStyle = 'tight'; //remove the spaces from the top and bottom of the column
+
+    public static $showColumnBorders = true; //remove the borders from the columns
+
     /**
      * The columns that should be searched.
      *
@@ -35,6 +39,12 @@ class Product extends Resource
      */
     public static $search = [
         'id',
+        'name',
+        'description',
+        'price',
+        'sku',
+        'quantity',
+
     ];
 
     /**
@@ -49,12 +59,12 @@ class Product extends Resource
                 'extraAttributes' => [
                     'readonly' => true
                 ]
-            ])->placeholder('Enter Product Slug...')->showOnIndex()->textAlign('center'),
-            Text::make('Name')->required()->showOnPreview()->placeholder('Enter Product Name...')->textAlign('center'),
-            Markdown::make('Description')->required()->placeholder('Enter Description...')->textAlign('center'),
-            Currency::make('Price')->currency('LKR')->required()->showOnPreview()->placeholder('Enter Price...')->textAlign('center'),
-            Text::make('Sku (Stock Keep Unit)')->required()->placeholder('sku')->placeholder('Enter SKU...')->textAlign('center')->help('Number that relailers use to differentiate products and track the inventory levels.'),
-            Number::make('Quantity')->required()->showOnPreview()->placeholder('Enter Quantity...')->textAlign('center'),
+            ])->placeholder('Enter Product Slug...')->showOnIndex()->textAlign('center')->sortable(),
+            Text::make('Name')->required()->showOnPreview()->placeholder('Enter Product Name...')->textAlign('center')->sortable(),
+            Markdown::make('Description')->required()->placeholder('Enter Description...')->textAlign('center')->sortable(),
+            Currency::make('Price')->currency('LKR')->required()->showOnPreview()->placeholder('Enter Price...')->textAlign('center')->sortable(),
+            Text::make('Sku')->required()->placeholder('sku')->placeholder('Enter SKU...')->textAlign('center')->help('Number that relailers use to differentiate products and track the inventory levels.')->sortable(),
+            Number::make('Quantity')->required()->showOnPreview()->placeholder('Enter Quantity...')->textAlign('center')->sortable(),
             Boolean::make('Status', 'is_published')->required()->showOnPreview()->textAlign('center'),
 
         ];
