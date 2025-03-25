@@ -37,6 +37,7 @@ class Product extends Resource
     public static $clickAction = 'ignore'; //when clicking on the row, it will not happen anything
 
 
+    public static $policy = Policies\ProductPolicy::class;
 
     /**
      * The columns that should be searched.
