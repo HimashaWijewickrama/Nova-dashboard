@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Fortify\Features;
+use Laravel\Nova\Menu\MenuItem;
+use Laravel\Nova\Menu\MenuSection;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
-
+use App\Nova\Dashboards\Main;
+use App\Nova\Dashboards\UserInsights;
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
     /**
@@ -27,6 +30,10 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 @endenv
             ');
         });
+
+        $this->getCustomMenu();
+
+
 
         Nova::withoutThemeSwitcher(); //remove the theme switcher from the dashboard
 
@@ -85,7 +92,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function dashboards(): array
     {
         return [
-            new \App\Nova\Dashboards\Main,
+            Main::make(),
+            UserInsights::make(),
         ];
     }
 
@@ -107,5 +115,26 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         parent::register();
 
         //
+    }
+
+    private function getCustomMenu(){
+        Nova::mainMenu(function(Request $request){
+            return [
+                MenuSection::dashboard(Main::class)->icon('chart-bar')->withBadge('New', 'success'),
+                MenuSection::make('Products', [
+                    MenuItem::make('All Products', '/resources/products'),
+                    MenuItem::make('Create Product', '/resources/products/new'),
+                ])->icon('shopping-bag')->collapsable(),
+                MenuSection::make('Brands', [
+                    MenuItem::make('All Brands', '/resources/brands'),
+                    MenuItem::make('Create Brand', '/resources/brands/new'),
+                ])->icon('tag')->collapsable(),
+                MenuSection::make('Users', [
+                    MenuItem::make('All Users', '/resources/users'),
+                    MenuItem::make('Create User', '/resources/users/new'),
+                ])->icon('users')->collapsable()
+            ];
+        });
+
     }
 }
