@@ -105,4 +105,9 @@ class User extends Resource
     {
         return [];
     }
+
+    //any user can't delete/edit/update/view users
+    public function authorizedTo(Request $request, string $ability): bool{
+        return false;
+    }
 }
