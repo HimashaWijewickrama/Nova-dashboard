@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Filters\ProductBrand;
 use Laravel\Nova\Fields\BelongsTo;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Boolean;
@@ -105,7 +106,9 @@ class Product extends Resource
      */
     public function filters(NovaRequest $request): array
     {
-        return [];
+        return [
+            new ProductBrand()
+        ];
     }
 
     /**
