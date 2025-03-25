@@ -3,6 +3,9 @@
 namespace App\Nova;
 
 use App\Nova\Filters\ProductBrand;
+use App\Nova\Metrics\AveragePrice;
+use App\Nova\Metrics\NewProducts;
+use App\Nova\Metrics\ProductsPerDay;
 use Laravel\Nova\Fields\BelongsTo;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Boolean;
@@ -96,7 +99,11 @@ class Product extends Resource
      */
     public function cards(NovaRequest $request): array
     {
-        return [];
+        return [
+           new NewProducts(),
+           new AveragePrice(),
+           new ProductsPerDay()
+        ];
     }
 
     /**
