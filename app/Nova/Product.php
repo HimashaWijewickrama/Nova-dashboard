@@ -30,6 +30,10 @@ class Product extends Resource
      */
     public static $title = 'name';
 
+    public function subtitle(){
+        return "Brand: {$this->brand->name}";
+    }
+
     public static $tableStyle = 'tight'; //remove the spaces from the top and bottom of the column
 
     public static $showColumnBorders = true; //remove the borders from the columns

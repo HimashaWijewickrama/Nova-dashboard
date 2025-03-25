@@ -26,6 +26,10 @@ class Brand extends Resource
      */
     public static $title = 'name';
 
+    public function subtitle(){
+        return "Industry: {$this->industry}";
+    }
+
     /**
      * The columns that should be searched.
      *

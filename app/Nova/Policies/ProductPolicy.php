@@ -44,7 +44,13 @@ class ProductPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return Nova::whenServing(function (NovaRequest $request) use ($user) {
+            // user has access deny and allow based on user id. Only admin can view all the resources and others can't see product resource. 
+            return in_array($user->id, [1]) || in_array('create-products', $user->permissions ?? []);
+
+        }, function (Request $request) use ($user) {
+            return in_array('create-products', $user->permissions);
+        });
     }
 
     /**
@@ -54,10 +60,10 @@ class ProductPolicy
     {
         return Nova::whenServing(function (NovaRequest $request) use ($user) {
             // user has access deny and allow based on user id. Only admin can view all the resources and others can't see product resource. 
-            return in_array($user->id, [1]) || in_array('view-products', $user->permissions ?? []);
+            return in_array($user->id, [1]) || in_array('update-products', $user->permissions ?? []);
 
         }, function (Request $request) use ($user) {
-            return in_array('view-products', $user->permissions);
+            return in_array('update-products', $user->permissions);
         });
     }
 
